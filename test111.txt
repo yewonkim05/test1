@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>회의실 선택</title>
+<style>
+  :root {
+    --bg:#0a1124; --card:#111a2e; --accent:#4cc9f0; --fg:#fff;
+  }
+  body {
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family: "Noto Sans KR", sans-serif;
+    display:flex; align-items:center; justify-content:center;
+    min-height:100vh; flex-direction:column;
+  }
+  h1 { font-size:clamp(28px,5vw,42px); margin-bottom:24px; text-align:center; }
+  .btn {
+    background:linear-gradient(180deg,#2b6cb0,#1d4e89);
+    border:none; border-radius:20px; color:white;
+    padding:20px 40px; font-size:clamp(20px,3vw,26px); font-weight:700;
+    cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,.4);
+    transition:transform .05s ease, background .2s ease;
+    width:min(300px,80vw); margin:10px auto;
+    display:block;
+  }
+  .btn:active { transform:translateY(2px); }
+  #rooms { display:none; text-align:center; }
+  #rooms .btn { width:min(240px,70vw); }
+</style>
+</head>
+<body>
+
+  <h1 id="title">원클릭 회의실</h1>
+
+  <div id="start">
+    <button class="btn" onclick="showRooms()">시작하기</button>
+  </div>
+
+  <div id="rooms">
+    <button class="btn" onclick="joinRoom(1)">1번방</button>
+    <button class="btn" onclick="joinRoom(2)">2번방</button>
+    <button class="btn" onclick="joinRoom(3)">3번방</button>
+    <button class="btn" onclick="joinRoom(4)">4번방</button>
+  </div>
+
+<script>
+  // 각 방의 Zoom 링크를 여기에 입력하세요.
+  const zoomRooms = {
+    1: "https://zoom.us/j/1111111111", // 1번방
+    2: "https://zoom.us/j/2222222222", // 2번방
+    3: "https://zoom.us/j/3333333333", // 3번방
+    4: "https://zoom.us/j/4444444444", // 4번방
+  };
+
+  function showRooms() {
+    document.getElementById('start').style.display = 'none';
+    document.getElementById('rooms').style.display = 'block';
+    document.getElementById('title').textContent = "회의실을 선택하세요";
+  }
+
+  function joinRoom(num) {
+    const url = zoomRooms[num];
+    if (url) window.open(url, "_blank", "noopener,noreferrer");
+    else alert("아직 설정되지 않은 방입니다.");
+  }
+</script>
+
+</body>
+</html>
